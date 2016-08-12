@@ -6,23 +6,20 @@ class Index(webapp2.RequestHandler):
     def getRandomMovie(self):
 
         # list of movies to select from
-        movies = ("The Big Lebowski", "Hero", "Training Day", "Pee-Wee's Big Adventure", "Ray")
+        movies = ["The Big Lebowski", "Blue Velvet", "Toy Story", "Star Wars", "Amelie"]
 
         # randomly choose one of the movies
+        randomIdx = random.randrange(len(movies))
 
-
-        return random.choice(movies)
+        return movies[randomIdx]
 
     def get(self):
         movie = self.getRandomMovie()
-        tomorrow_movie = self.getRandomMovie()
-        while movie == tomorrow_movie:
-            tomorrow_movie == self.getRandomMovie()
+
         # build the response string
         response = "<h1>Movie of the Day</h1>"
-        response += "<p>" + movie + "</p>"
-        response += "<h1>Tomorrow's Movie</h1>"
-        response += "<p>" + tomorrow_movie + "</p>"
+        response += "<ul><li>" + movie + "</li></ul>"
+
         self.response.write(response)
 
 app = webapp2.WSGIApplication([
